@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H5游戏爬取工具</title>
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4006584_osan6qklj5r.css">
+  <link rel="stylesheet" href="./css/toastr.css">
+  <script src="./js/toastr.js"></script>
+  <script src="./js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="max_width">
+        <h2>H5游戏爬取工具</h2> <i class="iconfont icon-caidan"></i>
+      </div>
+    </div>
+
+    <div class="container max_width">
+      <nav>
+        <ul>
+        </ul>
+      </nav>
+     <div class="paly_container">
+      <h3></h3>
+      <div class="paly_box">
+      </div>
+     </div>
+    </div>
+    <footer>
+      <div class="max_width">
+
+        <ul>
+          <li>
+            Copyright 2023
+          </li>
+          <li>
+            <a href="">
+              关于我们
+            </a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+  <script>
+    $(function () {
+      $('.icon-caidan').on('click', function (event) {
+        if ($('nav').is(':visible')) {
+          $('nav').hide()
+        } else {
+          $('nav').show()
+        }
+      })
+      $.get('./json/games.json', function (data) {
+        $('nav ul').html(data.map(item => {
+          // return `<li><a href="./${item}/minigame-index.html">${item.replace('.apps.minigame.vip', '')}</a></li>`
+          return `<li data-src="./${item}/minigame-index.html">${item.replace('.apps.minigame.vip', '')}</li>`
+        }))
+        $('.paly_box').html(data.map((item, index) => {
+          // return `<li><a href="./${item}/minigame-index.html">${item.replace('.apps.minigame.vip', '')}</a></li>`
+          return `<iframe ${!index ? '' : 'data-'}src="./${item}/minigame-index.html" data-src="./${item}/minigame-index.html" frameborder="0"></iframe>`
+        }))
+        $('ul li').on('click', function (event) {
+          // Your event handling code here
+          event.preventDefault(); // Prevent the default behavior of the anchor (e.g., navigating to a new page)
+          $('ul li').removeClass('active');
+          // Add the 'active' class to the clicked list item
+          $(this).addClass('active');
+          // Get the data-src attribute from the clicked list item
+          const dataSrc = $(this).attr('data-src');
+
+          // Update the src attribute of all iframes and show/hide them accordingly
+          $('.paly_box iframe').each(function () {
+            const iframe = $(this);
+            const iframeSrc = iframe.attr('data-src');
+            if (iframeSrc === dataSrc) {
+              $('.paly_container h3').html(dataSrc)
+              iframe.attr('src', dataSrc);
+              iframe.css({
+                'z-index': '1'
+              })
+            } else {
+              iframe.css({
+                'z-index': '0'
+              })
+            }
+          });
+
+        });
+      })
+    })
+  </script>
+  <script>
+    const socket = new WebSocket('ws://localhost:3230/ws');
+    socket.addEventListener('message', ({ data }) => {
+       iziToast.show({
+        title: 'Ws 消息:',
+        message: data,
+        position: 'topRight',
+        color: 'green', // blue, red, green, yellow
+      });
+    });
+  </script>
+</body>
+
+</html>

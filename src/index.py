@@ -15,7 +15,6 @@ def crawlerTasks(url):
         driver = webdriver.Chrome(service=ChromeService(chrome_driver_path), options=chrome_options)
         driver.get(url)
 
-
          # 等待一段时间，确保页面加载完成
         while True:
         # 执行你的任务
@@ -27,17 +26,35 @@ def crawlerTasks(url):
         print(e)
 
 url_list = [
-    'https://vivo-center.minigame.vip/game/mecha-beasts/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/mecha-beasts/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/plants-beatzombies/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/idle-rancher/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/stack-colors/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/save-the-goldfish/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/city-take-over/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/mushroom-takeover/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/classic-sudoku/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/parkour-race/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/makeup-master/play?from=home'
+    # 'https://vivo-center.minigame.vip/game/islanders-war/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/stack-ball-laya/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/two-player-games/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/ludo-star/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/candy-legend/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/mutant-dino/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/brick-brawl/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/stickman-fighting/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/make-good-money/play?from=home',
+    # 'https://vivo-center.minigame.vip/game/egg-zit-door/play?from=home',
+
+
+    'https://vivo-center.minigame.vip/game/idle-dino/play?from=home',
+    'https://vivo-center.minigame.vip/game/ninja-sword/play?from=home',
     'https://vivo-center.minigame.vip/game/plants-beatzombies/play?from=home',
-    'https://vivo-center.minigame.vip/game/idle-rancher/play?from=home',
-    'https://vivo-center.minigame.vip/game/stack-colors/play?from=home',
-    'https://vivo-center.minigame.vip/game/save-the-goldfish/play?from=home',
-    'https://vivo-center.minigame.vip/game/city-take-over/play?from=home',
-    'https://vivo-center.minigame.vip/game/mushroom-takeover/play?from=home',
-    'https://vivo-center.minigame.vip/game/classic-sudoku/play?from=home',
-    'https://vivo-center.minigame.vip/game/parkour-race/play?from=home',
-    'https://vivo-center.minigame.vip/game/makeup-master/play?from=home'
+    'https://vivo-center.minigame.vip/game/falling-down-stairs/play?from=loading',
+    'https://vivo-center.minigame.vip/game/island-defense-war/play?from=loading'
 ]
+
 
 # 创建线程列表
 threads = []

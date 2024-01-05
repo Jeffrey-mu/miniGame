@@ -3,10 +3,14 @@ const axios = require('axios')
 const path = require('path')
 async function requesting_real_resources(req) {
   if (req.method == 'GET') {
-    const data = await axios.get(`https://${req.url}`, { responseType: 'arraybuffer' })
-    console.log(data.data)
-    await writeFileWithDirectories(query_path(req), data.data)
-    return data
+    // 获取真实地址
+    try {
+      const data = await axios.get(`https://${req.url}`, { responseType: 'arraybuffer' })
+      return await writeFileWithDirectories(query_path(req), data.data)
+    } catch (error) {
+      console.log(error)
+      return error
+    }
   }
 }
 
@@ -32,7 +36,7 @@ async function writeFileWithDirectories(filePath, data) {
       const jsonStr = JSON.stringify(data);
       fs.writeFileSync(filePath, jsonStr);
     }
-    console.log(`File "${filePath}" has been written successfully.`);
+    return `File "${filePath.split('/')[filePath.split('/').length - 1]}" has been written successfully.`
   } catch (error) {
     console.error(`Error writing file "${filePath}":`, error.message);
   }
@@ -49,8 +53,54 @@ function fileExists(filePath) {
     return false; // File doesn't exist
   }
 }
+function isFileType(url) {
+  const file_types = [
+    'bin',
+    // Image formats
+    'jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg', 'webp',
 
+    // Audio formats
+    'mp3', 'ogg', 'wav',
+
+    // Video formats (if your game includes videos)
+    'mp4', 'webm', 'ogv',
+
+    // Font formats
+    'ttf', 'otf', 'woff', 'woff2',
+
+    // JSON data (for configuration, levels, etc.)
+    'json',
+
+    // Text files (if needed)
+    'txt',
+
+    // 3D models (if your game uses 3D assets)
+    'obj', 'fbx', 'gltf',
+
+    // Other asset formats (adjust based on your game's requirements)
+    'xml', 'csv', 'yaml', 'css', 'js'
+  ];
+  // Assuming req.url is something like "/path/to/resource/file.txt"
+  const urlParts = url.split('/');
+
+  // Get the last item
+  const lastItem = urlParts[urlParts.length - 1];
+
+  // Split the last item by dot (.)
+  const fileParts = lastItem.split('.');
+
+  // Get the last part after the last dot
+  const fileExtension = fileParts[fileParts.length - 1];
+
+  return file_types.includes(fileExtension)
+}
+
+function getGameList() {
+  fs.writeFileSync(path.join(__dirname, '../../public/json/games.json'), JSON.stringify(fs.readdirSync(path.join(__dirname, '../../games')).filter(item => item.length > 12)))
+}
 module.exports = {
   requesting_real_resources,
   verify_resources,
+  isFileType,
+  getGameList
 }
