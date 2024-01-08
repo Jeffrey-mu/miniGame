@@ -3,13 +3,7 @@
     margin-inline: auto;
 }
 
-@font-face {
-    font-family: "style";
-    src: url('./genkai-mincho-2.ttf');
-}
-
 .app {
-    font-family: style;
     display: flex;
     flex-direction: column;
     height: 100vh;
