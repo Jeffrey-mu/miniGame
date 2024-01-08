@@ -110,12 +110,42 @@ function isFileType(url) {
 }
 
 function getGameList() {
-    fs.writeFileSync(path.join(__dirname, '../../public/json/games.json'), JSON.stringify(fs.readdirSync(path.join(__dirname, '../../games')).filter(item => item.length > 12)))
+    const gamesFolderPath = '../../games'
+    watcher_dir(path.join(__dirname, gamesFolderPath), () => {
+        fs.writeFileSync(path.join(__dirname, '../../public/json/games.json'), JSON.stringify(fs.readdirSync(path.join(__dirname, gamesFolderPath)).filter(item => item.includes('apps.minigame.vip'))))
+    })
 }
+
+function watcher_dir(folderPath, callback) {
+    const chokidar = require('chokidar');
+    const watcher = chokidar.watch(folderPath, {
+        ignored: /(^|[\/\\])\../,
+        persistent: true,
+    });
+    watcher
+        .on('addDir', (dirPath) => {
+            const relativePath = path.relative(folderPath, dirPath);
+            if (!relativePath.includes(path.sep)) {
+                // 处理文件夹添加的逻辑
+                callback()
+            }
+        })
+        .on('unlinkDir', (dirPath) => {
+            const relativePath = path.relative(folderPath, dirPath);
+            if (!relativePath.includes(path.sep)) {
+                // 处理文件夹删除的逻辑
+                callback()
+            }
+        });
+
+    console.log(`Watching for changes in 游戏目录"${folderPath}"`);
+}
+
 module.exports = {
     requesting_real_resources,
     verify_resources,
     isFileType,
     getGameList,
-    logger
+    logger,
+    watcher_dir
 }

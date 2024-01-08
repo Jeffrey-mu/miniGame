@@ -37,6 +37,8 @@
         nav {
             border: 1px solid #eeeeeea6;
             ul {
+                height: 80vh;
+                overflow: auto;
                 li {
                     padding: 0 20px;
                     line-height: 40px;
@@ -83,7 +85,7 @@
                     padding: 20px;
                     background-color: black;
                     width: 450px;
-                    height: 800px;
+                    height: calc(100vh - 250px);
                     z-index: 1;
                 }
             }

@@ -41,6 +41,10 @@
 .app .container nav {
   border: 1px solid rgba(238, 238, 238, 0.6509803922);
 }
+.app .container nav ul {
+  height: 80vh;
+  overflow: auto;
+}
 .app .container nav ul li {
   padding: 0 20px;
   line-height: 40px;
@@ -87,7 +91,7 @@
   padding: 20px;
   background-color: black;
   width: 450px;
-  height: 800px;
+  height: calc(100vh - 250px);
   z-index: 1;
 }
 @media (max-width: 500px) {
