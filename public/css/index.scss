@@ -1,152 +1,133 @@
 .max_width {
-  width: min(1180px, 100% - 30px);
-  margin-inline: auto;
+    width: min(1180px, 100% - 30px);
+    margin-inline: auto;
 }
 
 @font-face {
-  font-family: "style";
-  src: url('./genkai-mincho-2.ttf');
+    font-family: "style";
+    src: url('./genkai-mincho-2.ttf');
 }
 
 .app {
-  font-family: style;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-
-  .header {
-    color: #fff;
-    background-color: rgb(0, 0, 0);
-    height: 90px;
-    line-height: 90px;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    font-size: 35px;
-    font-weight: 900;
-
-    .max_width {
-      display: flex;
-      justify-content: space-between;
-
-      .iconfont {
-        font-size: 30px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      height: 70px;
-      line-height: 70px;
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-  }
-
-
-
-  .container {
-    flex: 1;
-    margin-top: 20px;
+    font-family: style;
     display: flex;
-
-    nav {
-      border: 1px solid #eeeeeea6;
-
-      ul {
-
-        li {
-          padding: 0 20px;
-          line-height: 40px;
-          border-bottom: 1px solid #eee;
-          transition: all .2s;
-
-          &:hover {
-            cursor: pointer;
-            transition: all .2s;
-            background-color: #111;
-            color: #ffffff;
-            border-bottom: 1px solid #111;
-          }
-        }
-
-        .active {
-          cursor: pointer;
-          transition: all .2s;
-          background-color: #111;
-          color: #ffffff;
-          border-bottom: 1px solid #111;
-        }
-      }
-    }
-
-    .paly_container {
-      flex: 1;
-
-      h3 {
-        text-align: center;
-        font-size: 30px;
+    flex-direction: column;
+    height: 100vh;
+    .header {
+        color: #fff;
+        background-color: rgb(0, 0, 0);
+        height: 90px;
+        line-height: 90px;
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        font-size: 35px;
         font-weight: 900;
-        padding: 20px 0;
-      }
-
-      .paly_box {
+        .max_width {
+            display: flex;
+            justify-content: space-between;
+            .iconfont {
+                font-size: 30px;
+            }
+        }
+        @media (max-width: 500px) {
+            height: 70px;
+            line-height: 70px;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+    }
+    .container {
+        flex: 1;
+        margin-top: 20px;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-
-        iframe {
-          top: 0;
-          position: absolute;
-          padding: 20px;
-          background-color: black;
-          width: 500px;
-          height: 700px;
-          z-index: 1;
+        nav {
+            border: 1px solid #eeeeeea6;
+            ul {
+                li {
+                    padding: 0 20px;
+                    line-height: 40px;
+                    border-bottom: 1px solid #eee;
+                    transition: all .2s;
+                    align-items: center;
+                    display: flex;
+                    img {
+                        margin-right: 10px;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        transition: all .2s;
+                        background-color: #111;
+                        color: #ffffff;
+                        border-bottom: 1px solid #111;
+                    }
+                }
+                .active {
+                    cursor: pointer;
+                    transition: all .2s;
+                    background-color: #111;
+                    color: #ffffff;
+                    border-bottom: 1px solid #111;
+                }
+            }
         }
-      }
+        .paly_container {
+            flex: 1;
+            h3 {
+                text-align: center;
+                font-size: 30px;
+                font-weight: 900;
+                padding: 20px 0;
+            }
+            .paly_box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                iframe {
+                    top: 0;
+                    position: absolute;
+                    padding: 20px;
+                    background-color: black;
+                    width: 450px;
+                    height: 800px;
+                    z-index: 1;
+                }
+            }
+        }
+        @media (max-width: 500px) {
+            flex-direction: column-reverse;
+            nav {
+                position: fixed;
+                top: 90px;
+                z-index: 9;
+                background: #fff;
+                display: none;
+            }
+            .paly_container {
+                flex: none;
+                height: calc(100vh - 70px);
+                h3 {
+                    display: none;
+                }
+                .paly_box {
+                    iframe {
+                        padding: 0;
+                        top: -20px;
+                        width: 100%;
+                        height: calc(100vh - 70px);
+                    }
+                }
+            }
+        }
     }
-
-    @media (max-width: 500px) {
-      flex-direction: column-reverse;
-
-      nav {
-        position: fixed;
-        top: 90px;
-        z-index: 9;
-        background: #fff;
-        display: none;
-      }
-
-      .paly_container {
-        flex: none;
-        height: calc(100vh - 70px);
-
-        h3 {
-          display: none;
-        }
-
-
-        .paly_box {
-          iframe {
-            padding: 0;
-            top: -20px;
-            width: 100%;
-            height: calc(100vh - 70px);
-          }
-        }
-      }
-    }
-  }
-
 }
 
 footer {
-  padding: 20px;
-  height: 180px;
-  background-color: #111;
-  color: #ffffff;
-
-  ul li {
-    padding: 10px;
-  }
+    padding: 20px;
+    height: 180px;
+    background-color: #111;
+    color: #ffffff;
+    ul li {
+        padding: 10px;
+    }
 }

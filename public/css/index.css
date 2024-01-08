@@ -51,6 +51,11 @@
   line-height: 40px;
   border-bottom: 1px solid #eee;
   transition: all 0.2s;
+  align-items: center;
+  display: flex;
+}
+.app .container nav ul li img {
+  margin-right: 10px;
 }
 .app .container nav ul li:hover {
   cursor: pointer;
@@ -86,8 +91,8 @@
   position: absolute;
   padding: 20px;
   background-color: black;
-  width: 500px;
-  height: 700px;
+  width: 450px;
+  height: 800px;
   z-index: 1;
 }
 @media (max-width: 500px) {

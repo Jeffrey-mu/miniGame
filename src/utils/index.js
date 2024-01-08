@@ -11,14 +11,17 @@ async function requesting_real_resources(req) {
     if (req.method == 'GET') {
         // 获取真实地址
         try {
-            const data = await axios.get(`https://${req.url}`, { responseType: 'arraybuffer' })
-
+            const data = await get(`https://${req.url}`)
             return await writeFileWithDirectories(query_path(req), data.data)
         } catch (error) {
             logger.error(error);
             return error
         }
     }
+}
+
+async function get(url) {
+    return await axios.get(url, { responseType: 'arraybuffer' })
 }
 
 function verify_resources(req) {
