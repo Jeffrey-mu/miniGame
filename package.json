@@ -1,6 +1,10 @@
 {
+	"scripts": {
+		"start": "node app.js"
+	},
 	"dependencies": {
 		"axios": "^1.6.4",
+		"chokidar": "^3.5.3",
 		"express": "^4.18.2",
 		"express-ws": "^5.0.2",
 		"http-proxy-middleware": "^2.0.6",
